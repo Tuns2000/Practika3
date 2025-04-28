@@ -76,3 +76,21 @@ app.get('/shop/products/:id', (req, res) => {
 app.listen(SHOP_PORT, () => {
     console.log(`Shop server is running on http://localhost:${SHOP_PORT}`);
 });
+const response = await fetch('http://localhost:3000/graphql', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        query: `
+        {
+            products {
+                id
+                name
+                price
+                description
+            }
+        }
+        `,
+    }),
+});
